@@ -1,4 +1,4 @@
-import { addUrl, getUrlById, updateVisitCounter } from "../repositories/urlRepositories.js";
+import { addUrl, getUrlById, updateVisitCounter, deleteUrlById } from "../repositories/urlRepositories.js";
 import { nanoid } from "nanoid";
 
 export async function postUrl(req, res) {
@@ -51,5 +51,17 @@ export async function openShortUrl(req, res) {
         res.redirect(url);
     } catch (err) {
         res.status(500).send("openShortUrl: " + err);
+    }
+}
+
+export async function deleteUrl(req, res) {
+    const { urlId } = res.locals;
+
+    try {
+        const result = await deleteUrlById(urlId);
+
+        res.sendStatus(204);
+    } catch (err) {
+        res.status(500).send("deleteUrl: " + err);
     }
 }

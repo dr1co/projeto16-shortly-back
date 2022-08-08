@@ -7,8 +7,8 @@ export async function validateUser(req, res, next) {
     try {
         const result = await getUserByToken(token);
 
-        if (result.rows.length === 0) {
-            res.sendStatus(401)
+        if (result.rows.length === 0 || !token) {
+            return res.sendStatus(401);
         }
 
         res.locals.user = result.rows[0];

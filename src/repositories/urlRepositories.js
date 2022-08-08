@@ -28,7 +28,19 @@ export async function getUrlByShortUrl(shortUrl) {
         WHERE "shortUrl" = $1
     `,
         [shortUrl]
-    )
+    );
+}
+
+export async function getUserUrl(userId, urlId) {
+    return connection.query(`
+        SELECT * FROM "shortened-urls"
+        WHERE "id" = $1 AND "userId" = $2
+    `,
+        [
+            urlId,
+            userId
+        ]
+    );
 }
 
 export async function updateVisitCounter(id, visitCount) {
@@ -41,5 +53,14 @@ export async function updateVisitCounter(id, visitCount) {
             visitCount,
             id
         ]
+    );
+}
+
+export async function deleteUrlById(id) {
+    return connection.query(`
+        DELETE FROM "shortened-urls"
+        WHERE "id" = $1
+    `,
+        [id]
     );
 }
