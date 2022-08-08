@@ -64,3 +64,12 @@ export async function deleteUrlById(id) {
         [id]
     );
 }
+
+export async function getUserAllUrls(userId) {
+    return connection.query(`
+        SELECT * FROM "shortened-urls"
+        WHERE "userId" = $1
+    `,
+        [userId]
+    )
+}
