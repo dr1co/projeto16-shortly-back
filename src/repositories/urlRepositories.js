@@ -43,16 +43,13 @@ export async function getUserUrl(userId, urlId) {
     );
 }
 
-export async function updateVisitCounter(id, visitCount) {
+export async function updateVisitCounter(id) {
     return connection.query(`
         UPDATE "shortened-urls"
-        SET "visitCount" = $1
-        WHERE "id" = $2
+        SET "visitCount" = "visitCount" + 1
+        WHERE "id" = $1
     `
-        [
-            visitCount,
-            id
-        ]
+        [id]
     );
 }
 

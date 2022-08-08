@@ -43,11 +43,10 @@ export async function getSingleUrl(req, res) {
 }
 
 export async function openShortUrl(req, res) {
-    const { visitCount, id, url } = res.locals.url;
-    const increment = visitCount + 1;
+    const { id, url } = res.locals.url;
 
     try {
-        const result = await updateVisitCounter(id, increment);
+        const result = await updateVisitCounter(id);
 
         res.redirect(url);
     } catch (err) {
