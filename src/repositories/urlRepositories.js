@@ -12,3 +12,12 @@ export async function addUrl({userId, url, shortUrl}) {
         ]
     );
 }
+
+export async function getUrlById(id) {
+    return connection.query(`
+        SELECT * FROM "shortened-urls"
+        WHERE "id" = $1
+    `,
+        [id]
+    )
+}
