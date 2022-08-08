@@ -1,4 +1,4 @@
-import { addUrl, getUrlById } from "../repositories/urlRepositories.js";
+import { addUrl, getUrlById, updateVisitCounter } from "../repositories/urlRepositories.js";
 import { nanoid } from "nanoid";
 
 export async function postUrl(req, res) {
@@ -39,5 +39,17 @@ export async function getSingleUrl(req, res) {
         res.status(200).send(response);
     } catch (err) {
         res.status(500).send("getSingleUrl: " + err);
+    }
+}
+
+export async function openShortUrl(req, res) {
+    const { visitCount, id, url } = res.locals.url;
+
+    try {
+        const result = await updateVisitCounter(id, visitCount);
+
+        res.redirect(url);
+    } catch (err) {
+        res.status(500).send("openShortUrl: " + err);
     }
 }
