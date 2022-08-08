@@ -1,5 +1,5 @@
 import express from 'express';
-import validateSchema from '../middlewares/schemaMIddleware.js';
+import validateSchema from '../middlewares/schemaMiddleware.js';
 import { locateUser } from '../middlewares/locateUserMiddleware.js';
 import { postUser, loginUser } from '../controllers/usersControllers.js';
 import { signinSchema, signupSchema } from '../schemas/userSchemas.js';

@@ -21,6 +21,14 @@ export async function getUserByEmail(email) {
     );
 }
 
+export async function getUserByToken(token) {
+    return connection.query(`
+        SELECT * FROM "users" WHERE "token" = $1
+    `,
+        [token]
+    );
+}
+
 export async function updateUserToken(email, token) {
     return connection.query(`
         UPDATE "users"
